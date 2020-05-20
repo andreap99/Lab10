@@ -25,6 +25,7 @@ public class Simulator {
 	private int soddisfatti;
 	private int insoddisfatti;
 	private Map<Integer, Tavolo> tavoli = new TreeMap<>();
+	private List<Event> result = new ArrayList<>();
 	
 	//MODELLO DEL MONDO
 	
@@ -67,7 +68,7 @@ public class Simulator {
 		return insoddisfatti;
 	}
 	
-	public void run() {
+	public List<Event> run() {
 		this.clienti = 0;
 		this.soddisfatti = 0;
 		this.insoddisfatti = 0;
@@ -85,13 +86,13 @@ public class Simulator {
 			Event e = this.coda.poll();
 			
 			processEvent(e);
-			
+			result.add(e);
 		}
-		
+		return result;
 	}
 
 	private void processEvent(Event e) {
-		System.out.println(e);
+		//System.out.println(e);
 		
 		switch(e.getType()) {
 		case ARRIVO_GRUPPO:
